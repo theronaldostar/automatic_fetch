@@ -32,7 +32,7 @@ function $(element) {
 		responseText: undefined,
 		responseJSON: undefined,
 		type: "ethernet",
-		status: "net::ERR_INTERNET::NETWORK",
+		status: "net_ERR::INTERNET::NETWORK",
 		statusText: "Error on your internet."
 	};
 
