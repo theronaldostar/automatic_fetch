@@ -1,2 +1,2 @@
-# Ajax-fetch!
+# Automatic-fetch!
 Com a migração dos meus projetos do jQuery para o React, Eu sem querer usar outras ferramentas para fazer as requisições ou enviar informações para uma api-rest via ajax, como por exemplo o AXIOS. Decidir criar a minha popria ferramenta que é semelhante a do poprio jQuery utilizando o Fetch, esta minha ferramenta faz a automatização do mesmo com coisas chatas tipo enviar um parâmetro na header.
