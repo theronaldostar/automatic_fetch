@@ -1,0 +1,9 @@
+$({
+	link: "",// URL da api-rest
+	method: "",// GET, POST, PUT, DELETE...
+	cors: false,// Enviar este parâmetro caso queira efetuar requisições.. ou envio com bloqueio CORS
+	body: {},// Corpo da requisição
+	dataType: "json",// Retorno da requisição, "json" ou "text" padrão é json
+	success: (event) => {},// ...
+	error: (event) => {}// ...
+});
