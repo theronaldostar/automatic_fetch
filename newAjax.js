@@ -9,7 +9,7 @@
 */
 const $Ajax = (event) => {
 
-	let url = event.link === undefined || event.link === null || event.link === "" || event.link === {} ? `${this.origin}/` : event.link;
+	let url = event.link === undefined || event.link === null || event.link === "" || event.link === {} ? `${self.origin}/` : event.link;
 	let method = event.method === undefined || event.method === null || event.method === "" || event.method === {} ? "GET" : event.method.toUpperCase();
 	let headers = new Headers(event.headers === undefined || event.headers === null || event.headers === {} ? [] : event.headers);
 	let bodyParams = new URLSearchParams(Object.entries(event.body === undefined || event.body === null || event.body === {} ? [] : event.body));
