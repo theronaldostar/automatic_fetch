@@ -1,4 +1,4 @@
-$({
+$Ajax({
 	link: "",// URL da api-rest
 	method: "",// GET, POST, PUT, DELETE...
 	cors: false,// Enviar este parâmetro caso queira efetuar requisições.. ou envio com bloqueio CORS
