@@ -35,7 +35,7 @@ function $Ajax(event) {
 		statusText: "Error on your internet."
 	};
 
-	fetch(link, {method: method, headers: headers, body: dataError}).then(async response => {
+	fetch(link, {method: method, headers: headers, body: data}).then(async response => {
 		if (!response.ok) {
 			let resolve = response.text();
 			dataError.type = response.type;
