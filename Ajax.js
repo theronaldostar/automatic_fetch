@@ -27,7 +27,7 @@ function $Ajax(event) {
 	const data = dataParams !== undefined && dataParams !== null && method !== "GET" ? dataParams : null;
 	const link = event.cors !== undefined && event.cors === true ? anywhere+url+endLink : url+endLink;
 
-	let data = {
+	let dataError = {
 		responseText: undefined,
 		responseJSON: undefined,
 		type: "ethernet",
@@ -35,18 +35,18 @@ function $Ajax(event) {
 		statusText: "Error on your internet."
 	};
 
-	fetch(link, {method: method, headers: headers, body: data}).then(async response => {
+	fetch(link, {method: method, headers: headers, body: dataError}).then(async response => {
 		if (!response.ok) {
 			let resolve = response.text();
-			data.type = response.type;
-			data.status = response.status;
-			data.statusText = response.statusText;
+			dataError.type = response.type;
+			dataError.status = response.status;
+			dataError.statusText = response.statusText;
 			await resolve.then(res => {
-				data.responseText = res;
-				data.responseJSON = JSON.parse(res);
-				throw data;
+				dataError.responseText = res;
+				dataError.responseJSON = JSON.parse(res);
+				throw dataError;
 			});
 		};
 		return response[dataType]();
-	}).then(success).catch(() => error(data));
+	}).then(success).catch(() => error(dataError));
 };
