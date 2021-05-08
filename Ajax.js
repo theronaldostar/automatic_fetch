@@ -24,10 +24,10 @@ function $Ajax(event) {
 
 	const anywhere = "//cors-anywhere.herokuapp.com/";
 	const endLink = method === "GET" ? dataParams : "";
-	const data = dataParams !== undefined && dataParams !== null && method !== "GET" ? dataParams : null;
+	const params = dataParams !== undefined && dataParams !== null && method !== "GET" ? dataParams : null;
 	const link = event.cors !== undefined && event.cors === true ? anywhere+url+endLink : url+endLink;
 
-	let dataError = {
+	let _error = {
 		responseText: undefined,
 		responseJSON: undefined,
 		type: "ethernet",
@@ -35,18 +35,18 @@ function $Ajax(event) {
 		statusText: "Error on your internet."
 	};
 
-	fetch(link, {method: method, headers: headers, body: data}).then(async response => {
+	fetch(link, {method: method, headers: headers, body: params}).then(async (response) => {
 		if (!response.ok) {
 			let resolve = response.text();
-			dataError.type = response.type;
-			dataError.status = response.status;
-			dataError.statusText = response.statusText;
+			_error.type = response.type;
+			_error.status = response.status;
+			_error.statusText = response.statusText;
 			await resolve.then(res => {
-				dataError.responseText = res;
-				dataError.responseJSON = JSON.parse(res);
-				throw dataError;
+				_error.responseText = res;
+				_error.responseJSON = JSON.parse(res);
+				throw _error;
 			});
 		};
 		return response[dataType]();
-	}).then(success).catch(() => error(dataError));
+	}).then(success).catch(() => error(_error));
 };
