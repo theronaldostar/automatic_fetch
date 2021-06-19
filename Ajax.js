@@ -1,22 +1,22 @@
-/** @license Ajax-fetch v1.0
- * Ajax.js
- * 
- *TODO: Copyright (c) since 2020 Boteasy, all rights reserved.
- * 
- *? This file is open source for you to make AJAX requests;
- *? Developed By Ronaldo from Boteasy;
- *! More information at: https://github.com/theronaldostar/Ajax-fetch.
+/** @license Ajax-fetch v1.1
+	* Ajax.js
+	* 
+	* Copyright (c) since 2020 Boteasy, all rights reserved.
+	* 
+	* This file is open source for you to make AJAX requests;
+	* Developed By Ronaldo from Boteasy;
+	* More information at: https://github.com/theronaldostar/Ajax-fetch
 */
 function $Ajax(event) {
 
-	let url = event.url === undefined || event.url === null || event.url === "" || event.url === {} ? `${self.origin}/` : event.url;
+	let url = event.url === undefined || event.url === null || event.url === "" || event.url === {} ? `${window.location.origin}/` : event.url;
 	let method = event.method === undefined || event.method === null || event.method === "" || event.method === {} ? "GET" : event.method.toUpperCase();
 	let headers = new Headers(event.headers === undefined || event.headers === null || event.headers === {} ? [] : event.headers);
 	let dataParams = new URLSearchParams(Object.entries(event.data === undefined || event.data === null || event.data === {} ? [] : event.data));
 
 	const dataType = event.dataType === undefined || event.dataType === null || event.dataType === "" || event.dataType === {} ? "json" : event.dataType;
 	const success = event.success === undefined || event.success === null || event.success === "" || event.success === {} ? () => {} : event.success;
-	const error = event.error === undefined || event.error === null || event.error === "" || event.error === {} ? () => {} : event.error;
+	const error = event.error === undefined || event.error === null || event.error === "" || event.error === {} ? (error) => console.error(error) : event.error;
 
 	if (method !== "GET") headers.append("Content-Type", "application/x-www-form-urlencoded");
 	headers.append("Content-Type", "charset=utf-8");
@@ -31,8 +31,8 @@ function $Ajax(event) {
 		responseText: undefined,
 		responseJSON: undefined,
 		type: "ethernet",
-		status: "net::ERR_INTERNET::ERR_NETWORK",
-		statusText: "Error on your internet."
+		status: "net::ERR_CONNECTION_CLOSED",
+		statusText: "There was an error connecting check your internet"
 	};
 
 	fetch(link, {method: method, headers: headers, body: params}).then(async (response) => {
@@ -41,9 +41,9 @@ function $Ajax(event) {
 			_error.type = response.type;
 			_error.status = response.status;
 			_error.statusText = response.statusText;
-			await resolve.then(res => {
-				_error.responseText = res;
-				_error.responseJSON = JSON.parse(res);
+			await resolve.then((event) => {
+				_error.responseText = event;
+				_error.responseJSON = JSON.parse(event);
 				throw _error;
 			});
 		};
